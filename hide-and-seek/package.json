@@ -1,0 +1,12 @@
+{
+  "name": "hide-and-seek-online",
+  "version": "1.0.0",
+  "description": "브라우저로 하는 실시간 멀티 숨바꼭질",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/soak.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": { "ws": "^8.18.0" }
+}

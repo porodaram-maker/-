@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>숨바꼭질 온라인</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- 시작 화면 -->
+<div id="home" class="screen">
+  <div class="card">
+    <h1>🙈 숨바꼭질</h1>
+    <p class="sub">친구들과 함께하는 실시간 멀티 숨바꼭질</p>
+    <label>닉네임<input id="nameInput" maxlength="12" placeholder="이름을 입력하세요"></label>
+    <button id="createBtn" class="primary">방 만들기</button>
+    <div class="row">
+      <input id="codeInput" maxlength="4" placeholder="방 코드" autocapitalize="characters">
+      <button id="joinBtn">참가</button>
+    </div>
+    <p id="homeErr" class="err"></p>
+    <details>
+      <summary>게임 방법</summary>
+      <ul>
+        <li><b>이동</b>: WASD / 방향키 (모바일은 화면 왼쪽 드래그)</li>
+        <li><b>숨는 사람</b>: 술래가 눈 감은 동안 숨으세요. 🌳 덤불 안에 있으면 바로 옆까지 와야 보입니다.</li>
+        <li><b>술래</b>: 숨은 사람에게 닿으면 잡힙니다. 벽 너머는 보이지 않아요.</li>
+        <li>남은 60·40·20초에 숨은 사람의 대략적 위치가 술래에게 노출됩니다.</li>
+        <li>잡히면 유령이 되어 자유롭게 관전합니다.</li>
+        <li>점수: 잡기 +2, 전원 검거 +3, 끝까지 생존 +3</li>
+        <li>채팅: Enter · 점수판: Tab</li>
+      </ul>
+    </details>
+  </div>
+</div>
+
+<!-- 게임 HUD -->
+<div id="hud" class="hidden">
+  <div id="topbar">
+    <span id="roleBadge"></span>
+    <span id="phaseText"></span>
+    <span id="timer"></span>
+    <span id="aliveText"></span>
+  </div>
+  <div id="feed"></div>
+  <div id="bigMsg"></div>
+  <div id="chatLog"></div>
+  <input id="chatInput" class="hidden" maxlength="80" placeholder="메시지 입력 후 Enter">
+  <div id="corner">
+    <button id="chatBtn" title="채팅">💬</button>
+    <button id="scoreBtn" title="점수판">🏆</button>
+    <button id="leaveBtn" title="나가기">🚪</button>
+  </div>
+  <div id="conn" class="hidden">연결이 끊겼습니다. 재연결 중…</div>
+</div>
+
+<!-- 대기실 -->
+<div id="lobby" class="hidden panel">
+  <h2>대기실 <span id="roomCode" class="code"></span></h2>
+  <button id="copyBtn" class="small">🔗 초대 링크 복사</button>
+  <ul id="playerList"></ul>
+  <div id="hostControls">
+    <div class="row">
+      <button id="addBotBtn" class="small">🤖 봇 추가</button>
+      <button id="removeBotBtn" class="small">봇 빼기</button>
+    </div>
+    <label>숨는 시간 <select id="hideSel"></select></label>
+    <label>찾는 시간 <select id="seekSel"></select></label>
+    <button id="startBtn" class="primary">게임 시작</button>
+  </div>
+  <p id="waitHost" class="sub">방장이 게임을 시작하길 기다리는 중… (돌아다니며 맵을 구경하세요)</p>
+</div>
+
+<!-- 점수판 -->
+<div id="scoreboard" class="hidden panel center">
+  <h2 id="sbTitle">점수판</h2>
+  <table><tbody id="sbBody"></tbody></table>
+  <button id="stopBtn" class="small hidden">⏹ 게임 멈추고 대기실로 (방장)</button>
+</div>
+
+<script src="shared.js"></script>
+<script src="client.js"></script>
+</body>
+</html>
